@@ -46,6 +46,11 @@ Route::group(['prefix' => 'dealer'], function () {
         'as' => 'dealer.get.newClient'
     ]);
 
+    Route::post('add-client', [
+        'uses' => 'DealersController@addClient',
+        'as' => 'dealer.post.addClient'
+    ]);
+
     Route::get('encrypt', [
         'uses' => 'DealersController@encrypt',
         'as' => 'dealer.get.encrypt'

@@ -146,7 +146,7 @@ input {
     color: rgb(106, 159, 171);
     position: absolute;
     left: 10px;
-    top: 35px;
+    top: 42px;
 	width: 30px;
 }
 
@@ -262,11 +262,14 @@ p.change_link{
 	top: 1px;
 }
 /** Styling both forms **/
-#register, 
-#login{
+#register,
+#dashboard,
+#client, 
+#login
+#encrypt{
 	position: absolute;
 	top: 0px;
-	width: 88%;	
+	width: 100%;	
 	padding: 18px 6% 60px 6%;
 	margin: 0 0 35px 0;
 	background: rgb(247, 247, 247);
@@ -277,7 +280,7 @@ p.change_link{
 	-webkit-box-shadow: 5px;
 	-moz-border-radius: 5px;
 		 border-radius: 5px;
-}
+}/*
 #register{	
 	z-index: 21;
 	opacity: 0;
@@ -318,7 +321,7 @@ p.change_link{
 	animation-name: scaleOut;
 }
 
-/** the actual animation, credit where due : http://daneden.me/animate/ ***/
+** the actual animation, credit where due : http://daneden.me/animate/ 
 .animate{
 	-webkit-animation-duration: 0.5s;
 	-webkit-animation-fill-mode: both;
@@ -334,7 +337,7 @@ p.change_link{
 	
 	animation-duration: 0.5s;
 	animation-fill-mode: both;
-}
+}*/
 
 /** yerk some ugly IE fixes 'cause I know someone will ask "why does it look ugly in IE?", no matter how many warnings I will put in the article */
 

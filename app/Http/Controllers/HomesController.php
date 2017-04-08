@@ -47,6 +47,7 @@ class HomesController extends Controller
             }
         }
     }
+    
     public function login(Request $request)
     {
         /** Attempt to authenticate the user */
