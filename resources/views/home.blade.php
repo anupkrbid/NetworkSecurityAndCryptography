@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -26,7 +25,7 @@
                         <h1>Log in</h1> 
                         <p> 
                             <label for="username" class="uname" data-icon="u" > Your Email </label>
-                            <input id="username" name="username" required="required" type="text" placeholder="eg. mysecuremail@mail.com"/>
+                            <input id="name" name="email" required="required" type="text" placeholder="eg. mysecuremail@mail.com"/>
                         </p>
                         <p> 
                             <label for="password" class="youpasswd" data-icon="p"> Your Password </label>

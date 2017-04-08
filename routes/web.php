@@ -18,10 +18,10 @@ Route::get('/', function () {
     return view('home');
 })->name('app.get.home');
 
-Route::post('/register', [
-	'uses' => 'HomesController@register',
-	'as' => 'app.post.register'
-]);
+// Route::post('/register', [
+// 	'uses' => 'HomesController@register',
+// 	'as' => 'app.post.register'
+// ]);
 
 Route::post('/login', [
     'uses' => 'HomesController@login',
@@ -29,14 +29,31 @@ Route::post('/login', [
 ]);
 
 Route::post('/logout', [
-    'uses' => 'AuthsController@logout',
+    'uses' => 'HomesController@logout',
     'as' => 'app.post.logout'
 ]);
 
 /** Dealer Department */
 Route::group(['prefix' => 'dealer'], function () {
-    Route::get('/dashboard', [
-        'uses' => 'DealersController@adashboard',
+    
+    Route::get('dashboard', [
+        'uses' => 'DealersController@dashboard',
         'as' => 'dealer.get.dashboard'
+    ]);
+
+    Route::get('new-client', [
+        'uses' => 'DealersController@newClient',
+        'as' => 'dealer.get.newClient'
+    ]);
+
+    Route::get('encrypt', [
+        'uses' => 'DealersController@encrypt',
+        'as' => 'dealer.get.encrypt'
+    ]);
+
+
+    Route::delete('delete-client/{id}', [
+        'uses' => 'DealersController@deleteClient',
+        'as' => 'dealer.delete.deleteClient'
     ]);
 });
