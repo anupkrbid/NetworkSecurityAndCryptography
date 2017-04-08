@@ -11,6 +11,32 @@
 |
 */
 
+
+/** Home Login Page */
 Route::get('/', function () {
-    return view('welcome');
+	// dd(bcrypt('123'));
+    return view('home');
+})->name('app.get.home');
+
+Route::post('/register', [
+	'uses' => 'HomesController@register',
+	'as' => 'app.post.register'
+]);
+
+Route::post('/login', [
+    'uses' => 'HomesController@login',
+    'as' => 'app.post.login'
+]);
+
+Route::post('/logout', [
+    'uses' => 'AuthsController@logout',
+    'as' => 'app.post.logout'
+]);
+
+/** Dealer Department */
+Route::group(['prefix' => 'dealer'], function () {
+    Route::get('/dashboard', [
+        'uses' => 'DealersController@adashboard',
+        'as' => 'dealer.get.dashboard'
+    ]);
 });
