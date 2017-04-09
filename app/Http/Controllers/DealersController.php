@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\EncryptedCoefficient;
+use App\FunctionValue;
+
 
 class DealersController extends Controller
 {
@@ -60,44 +63,66 @@ class DealersController extends Controller
 
     public function encrypt(Request $request)
     {
-        return view('dealer.encrypt');
+        $user = User::orderBy('id', 'desc')->first();  // Getting id of the last user added
+        // dd($user->id);
+        return view('dealer.encrypt', ['maxid' => $user->id]);
     }
     
     public function encryptKey(Request $request)
     {
-        // if ( $request->new_password != "" || $request->cnf_new_password != "" ) {
-        //     if ( $request->new_password == $request->cnf_new_password ) {
-        //         $user = Auth::user();
-        //         if ($user) {
-        //             /** Request a new data using the requst data */
-        //             $user->password = \Hash::make($request->new_password);
-        //            // $user->password = bcrypt($request->new_password);
-        //             if ($user->save()) {
-        //                 return response()->json(['isMatched' => true]);
-        //             } else {
-        //                 return response()->json([
-        //                     'isMatched' => false, 
-        //                     'error' => "Some error occured"
-        //                 ]);
-        //             }
-        //         } else {
-        //             return response()->json([
-        //                 'isMatched' => false,
-        //                 'error' => "No record"
-        //             ]);
-        //         }
-        //     } else {
-        //         return response()->json([
+        User::where('isDealer', 0)->update(['isVerified' => 0]);
+        // if(User::where('isDealer', 0)->update(['isVerified' => 0])){
+        //     return response()->json([
         //             'isMatched' => false, 
-        //             'error' => "Password did not match!"
+        //             'error' => "Couldnot mass update users"
         //         ]);
-        //     }
-        // } else {
-            return response()->json([
-                    'isMatched' => false, 
-                    'error' => "Password cannot be empty!"
-                ]);
         // }
+
+        $encrypted_coefficient = EncryptedCoefficient::all();
+        if($encrypted_coefficient) {
+            EncryptedCoefficient::truncate();
+        }
+
+        $function_value = FunctionValue::all();
+        if($function_value) {
+            FunctionValue::truncate();
+        }
+
+        foreach ($request->FunctionValue as $key => $value) {
+            $function_value = new FunctionValue();
+
+            $function_value->x = $key;
+            $function_value->fx = $value;
+            $function_value->base = $request->Base;
+            $function_value->modulus = $request->Modulus;
+
+            if ( !($function_value->save()) ) {
+                return response()->json([
+                    'isMatched' => false, 
+                    'error' => "Couldnot complete FunctionValue update"
+                ]);
+            }
+        }
+
+        foreach ($request->EncryptedCoefficient as $key => $value) {
+            $encrypted_coefficient = new EncryptedCoefficient();
+
+            $encrypted_coefficient->a = $key;
+            $encrypted_coefficient->Ea = $value;
+
+            if ( !($encrypted_coefficient->save()) ) {
+                return response()->json([
+                    'isMatched' => false, 
+                    'error' => "Couldnot complete EncryptedCoefficient update"
+                ]);
+            }
+        }
+
+        return response()->json([
+            'isMatched' => true, 
+            'error' => "Encryption Completed"
+        ]);
+
     }
 
 }

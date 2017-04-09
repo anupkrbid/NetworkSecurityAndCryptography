@@ -32,6 +32,7 @@
                 <div id="client">
                         {{ csrf_field() }}
                         <h1> Encrypt Key </h1> 
+                        <input id="max" type="hidden" data-id="{{ $maxid }}">
                         <p> 
                             <label for="passwordsignup" class="youpasswd">Your Secret Key </label>
                             <select id="a0">
@@ -79,6 +80,79 @@
         </div>  
     </section>
 </div>
+
      
 @endsection
 
+@section('scripts')
+
+<script type="text/javascript">
+    $(document).ready(function () {
+    
+    var i,k=3,n=5;
+    var g = $('#g').val();
+    var x = $('#x').val();
+    var maxId = $('#max').data('id');;
+    
+    $('#btn_encrypt').click(function () {
+        var Polynomial = []; // Polynomial // f(x) = 4 + 5x + 7x^2
+        var FunctionValue = []; // Function Values // 
+        var EncryptedCoefficient = []; // Encripted Polynomials // Encript[Polynomial]
+        
+        Polynomial.push($('#a0').val());
+        Polynomial.push($('#a1').val());
+        Polynomial.push($('#a2').val());
+
+        for(i=0; i<=maxId; i++){
+            FunctionValue[i]=(Polynomial[0])+(Polynomial[1]*i)+(Polynomial[2]*i*i);
+        }
+
+        for(i=0; i<k; i++){
+            EncryptedCoefficient[i] = Encrypt(Polynomial[i], g, x); 
+        }
+
+        // console.log(Polynomial);
+        // console.log(FunctionValue);
+        // console.log(EncryptedCoefficient);
+        // console.log(x);
+        // console.log(g);
+
+        $.ajax({
+            type : "post",
+            url : "{{ route('dealer.post.encryptKey') }}",
+            data : {
+                _token : "{{ csrf_token() }}",
+            //    Polynomial : Polynomial,
+                FunctionValue : FunctionValue,
+                EncryptedCoefficient : EncryptedCoefficient,
+                Modulus : x,
+                Base : g,
+            },
+            success: function(response) {
+                if (response.isMatched == true) {
+                    swal('success', "Working" ,'success');
+                } else {
+                    swal('error', response.error ,'error');
+                }
+            }
+        });
+    });
+    
+    Encrypt = function (exponent, base, modulus) {
+        var result = 1;
+        while ((exponent > 0)) {
+            if (exponent % 2 === 1)
+                result = (result * base) % modulus;
+            exponent = exponent >> 1;
+            base = (base * base) % modulus;
+        };
+        return result;
+    };
+});
+
+
+</script>
+
+
+
+@endsection
