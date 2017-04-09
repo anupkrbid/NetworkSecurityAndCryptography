@@ -34,7 +34,7 @@ Route::post('/logout', [
 ]);
 
 /** Dealer Department */
-Route::group(['prefix' => 'dealer'], function () {
+Route::group(['prefix' => 'dealer', 'middleware' => 'auth'], function () {
     
     Route::get('dashboard', [
         'uses' => 'DealersController@dashboard',
@@ -54,6 +54,11 @@ Route::group(['prefix' => 'dealer'], function () {
     Route::get('encrypt', [
         'uses' => 'DealersController@encrypt',
         'as' => 'dealer.get.encrypt'
+    ]);
+
+    Route::post('encrypt-key', [
+        'uses' => 'DealersController@encryptKey',
+        'as' => 'dealer.post.encryptKey'
     ]);
 
 

@@ -57,4 +57,47 @@ class DealersController extends Controller
             return redirect()->back()->with('error', "Sorry this client doen't exist!");
         }
     }
+
+    public function encrypt(Request $request)
+    {
+        return view('dealer.encrypt');
+    }
+    
+    public function encryptKey(Request $request)
+    {
+        // if ( $request->new_password != "" || $request->cnf_new_password != "" ) {
+        //     if ( $request->new_password == $request->cnf_new_password ) {
+        //         $user = Auth::user();
+        //         if ($user) {
+        //             /** Request a new data using the requst data */
+        //             $user->password = \Hash::make($request->new_password);
+        //            // $user->password = bcrypt($request->new_password);
+        //             if ($user->save()) {
+        //                 return response()->json(['isMatched' => true]);
+        //             } else {
+        //                 return response()->json([
+        //                     'isMatched' => false, 
+        //                     'error' => "Some error occured"
+        //                 ]);
+        //             }
+        //         } else {
+        //             return response()->json([
+        //                 'isMatched' => false,
+        //                 'error' => "No record"
+        //             ]);
+        //         }
+        //     } else {
+        //         return response()->json([
+        //             'isMatched' => false, 
+        //             'error' => "Password did not match!"
+        //         ]);
+        //     }
+        // } else {
+            return response()->json([
+                    'isMatched' => false, 
+                    'error' => "Password cannot be empty!"
+                ]);
+        // }
+    }
+
 }

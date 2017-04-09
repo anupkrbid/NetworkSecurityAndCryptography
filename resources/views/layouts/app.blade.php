@@ -41,6 +41,10 @@
                 swal('', "{{ session()->get('success') }}", 'success');
             @endif
         </script>
+
+        <script type="text/javascript" src="/js/jquery.js"></script>
+        <script type="text/javascript" src="/js/encrypt-decrypt.js"></script>
+
     </body>
     
 
