@@ -11,17 +11,16 @@
 |
 */
 
-
-/** Home Login Page */
-Route::get('/', function () {
-	// dd(bcrypt('123'));
-    return view('home');
-})->name('app.get.home');
-
 // Route::post('/register', [
 // 	'uses' => 'HomesController@register',
 // 	'as' => 'app.post.register'
 // ]);
+
+/** Home Login Page */
+Route::get('/', function () {
+    return view('home');
+})->name('app.get.home');
+
 
 Route::post('/login', [
     'uses' => 'HomesController@login',
@@ -65,5 +64,25 @@ Route::group(['prefix' => 'dealer', 'middleware' => 'auth'], function () {
     Route::delete('delete-client/{id}', [
         'uses' => 'DealersController@deleteClient',
         'as' => 'dealer.delete.deleteClient'
+    ]);
+});
+
+
+/** Client Department */
+Route::group(['prefix' => 'client', 'middleware' => 'auth'], function () {
+
+    Route::get('profile', [
+        'uses' => 'ClientsController@profile',
+        'as' => 'client.get.profile'
+    ]);
+
+    Route::post('verify-key/{id}', [
+        'uses' => 'ClientsController@verifyKey',
+        'as' => 'client.post.verifyKey'
+    ]);
+
+    Route::post('decrypt-key', [
+        'uses' => 'ClientsController@decryptKey',
+        'as' => 'client.post.decryptKey'
     ]);
 });
