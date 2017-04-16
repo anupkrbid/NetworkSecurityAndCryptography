@@ -34,8 +34,7 @@ class FunctionValue extends Model
 		foreach ($encryptedCoefficients as $encryptedCoefficient) {
 			$Ea[$i++] = $encryptedCoefficient->Ea;
 		}
-		$val = $Ea[0] * (pow($Ea[1],$x)) * (pow($Ea[2],$x*$x));
-		$val = $val % $modulus;
+		$val =($Ea[0] * (pow($Ea[1],$x)) * (pow($Ea[2],$x*$x))) % $modulus;
 		return $val;
 	}
 

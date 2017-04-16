@@ -76,7 +76,12 @@ Route::group(['prefix' => 'client', 'middleware' => 'auth'], function () {
         'as' => 'client.get.profile'
     ]);
 
-    Route::post('verify-key/{id}', [
+    Route::put('verify-key/{id}', [
+        'uses' => 'ClientsController@verifyKey',
+        'as' => 'client.post.verifyKey'
+    ]);
+
+    Route::patch('verify-key/{id}', [
         'uses' => 'ClientsController@verifyKey',
         'as' => 'client.post.verifyKey'
     ]);

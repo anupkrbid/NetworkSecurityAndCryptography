@@ -25,6 +25,9 @@ class ClientsController extends Controller
     {
        	$verificationResult = FunctionValue::verify($id);
        	if($verificationResult){
+       		$user = User::find($id);
+       		$user->isVerified = 1;
+       		$user->save();
 			return redirect()->back()->with('success', "Verification Successful!");
 		} else {
 			return redirect()->back()->with('error', "Verification Unsuccessful!");

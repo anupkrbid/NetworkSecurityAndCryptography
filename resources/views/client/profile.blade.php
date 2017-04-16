@@ -35,8 +35,8 @@
                     <div id="verify">
                         <form  action="{{ route('client.post.verifyKey', ['id' => $user->id]) }}" method="post" autocomplete="on"> 
                             {{ csrf_field() }}
-                           {{--  {{ method_field('put') }}
-                            {{ method_field('patch') }} --}}
+                            {{ method_field('put') }}
+                            {{ method_field('patch') }}
                             <h1> Key Verification </h1> 
                             <p> 
                                 <label for="passwordsignup" class="youpasswd" > Key </label>
