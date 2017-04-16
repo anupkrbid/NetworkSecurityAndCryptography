@@ -67,27 +67,39 @@
                     </div>   
                 @else
                     <div id="profile">
-                        <form  action="{{ route('dealer.post.addClient') }}" method="post" autocomplete="on"> 
+                        <form  action="{{ route('client.post.decryptKey') }}" method="post" autocomplete="on">
                             {{ csrf_field() }}
-                            <h1> Add New Client </h1> 
+                            <h1> Reveal Secret Key </h1> 
                             <p> 
-                                <label for="usernamesignup" class="uname" data-icon="u">Your Name</label>
-                                <input id="usernamesignup" name="name" required="required" type="text" placeholder="eg. my secure name" />
+                                <label for="usernamesignup" class="uname">Select Three Random Points</label>
+
+                                <select name="x0" class="drop" id="x0" required>
+                                    <option value="">--</option>
+                                    @foreach($maxClients as $maxClient)                                    
+                                        <option value="{{ $maxClient->id }}">{{ $maxClient->x }}</option>
+                                    @endforeach
+                                </select>
+
+                                
+                                <select name="x1" class="drop" id="x1" required>
+                                    <option value="">--</option>
+                                    @foreach($maxClients as $maxClient)                                    
+                                        <option value="{{ $maxClient->id }}">{{ $maxClient->x }}</option>
+                                    @endforeach
+                                </select>
+
+
+                                <select name="x2" class="drop" id="x2" required>
+                                    <option value="">--</option>
+                                    @foreach($maxClients as $maxClient)                                   
+                                        <option value="{{ $maxClient->id }}">{{ $maxClient->x }}</option>
+                                    @endforeach
+                                </select>
+
                             </p>
                             <p> 
-                                <label for="emailsignup" class="youmail" data-icon="e" > Your Email</label>
-                                <input id="emailsignup" name="email" required="required" type="email" placeholder="eg. mysecuremail@mail.com"/> 
-                            </p>
-                            <p> 
-                                <label for="passwordsignup" class="youpasswd" data-icon="p">Your Password </label>
-                                <input id="passwordsignup" name="password" required="required" type="password" placeholder="eg. X8df!90EO"/>
-                            </p>
-                            <p> 
-                                <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please Confirm Your Password </label>
-                                <input id="passwordsignup_confirm" name="cnf_password" required="required" type="password" placeholder="eg. X8df!90EO"/>
-                            </p>
                             <p class="signin button"> 
-                                <input type="submit" value="Register"/> 
+                                <input type="submit" value="Generate Key"/> 
                             </p>
                         </form>
                     </div> 
@@ -97,4 +109,25 @@
     </section>
 </div>
      
+@endsection
+
+@section('scripts')
+
+<script type="text/javascript">
+$(document).ready(function() {    
+    $(".drop").change(function(){
+        var selVal=[];
+        $(".drop").each(function(){
+            selVal.push(this.value);
+        });
+       
+        $(this).siblings(".drop").find("option").removeAttr("disabled").filter(function(){
+           var a=$(this).parent("select").val();
+           return (($.inArray(this.value, selVal) > -1) && (this.value!=a))
+        }).attr("disabled","disabled");
+    });
+    $(".drop").eq(0).trigger('change');
+});
+</script>
+
 @endsection

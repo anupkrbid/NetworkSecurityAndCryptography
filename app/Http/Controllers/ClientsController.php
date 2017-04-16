@@ -14,11 +14,17 @@ class ClientsController extends Controller
     public function profile(Request $request)
     {
     	$user = User::find(Auth::user()->id);
-    	$functionValues = FunctionValue::where('x', '=', $user->id)->first();
-    	$encryptedCoefficients = EncryptedCoefficient::all();
-    	return view('client.profile', 
-    		['user' => $user], 
-    		['functionValues' => $functionValues, 'encryptedCoefficients' => $encryptedCoefficients]);
+
+    	if($user->isVerified){
+    		$maxClients = FunctionValue::all();
+    		return view('client.profile', ['user' => $user], ['maxClients' => $maxClients]);
+    	}else{
+	    	$functionValues = FunctionValue::where('x', '=', $user->id)->first();
+	    	$encryptedCoefficients = EncryptedCoefficient::all();
+	    	return view('client.profile', 
+	    		['user' => $user], 
+	    		['functionValues' => $functionValues, 'encryptedCoefficients' => $encryptedCoefficients]);
+    	}
     }
 
     public function verifyKey(Request $request, $id)
@@ -36,8 +42,12 @@ class ClientsController extends Controller
 
     public function decryptKey(Request $request)
     {
-    	// $users = User::where('isDealer','=','0')->get();
-    	// return view('dealer.dashboard', ['users' => $users]);
-    	return view('client.profile');
+    	$x0Id = $request->x0;
+    	$x1Id = $request->x1;
+    	$x2Id = $request->x2;
+
+    	$key = FunctionValue::decrypt($x0Id, $x1Id, $x2Id);
+
+		return redirect()->back()->with('success', "Secret Key is : ". $key);
     }
 }
