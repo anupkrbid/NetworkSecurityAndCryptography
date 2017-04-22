@@ -71,58 +71,26 @@ class DealersController extends Controller
     public function encryptKey(Request $request)
     {
         User::where('isDealer', 0)->update(['isVerified' => 0]);
-        // if(User::where('isDealer', 0)->update(['isVerified' => 0])){
-        //     return response()->json([
-        //             'isMatched' => false, 
-        //             'error' => "Couldnot mass update users"
-        //         ]);
-        // }
 
-        $encrypted_coefficient = EncryptedCoefficient::all();
-        if($encrypted_coefficient) {
-            EncryptedCoefficient::truncate();
-        }
+        $a0 = $request->a0;
+        $a1 = $request->a1;
+        $a2 = $request->a2;
+        $g = $request->g;
+        $x = $request->x;
+        //dd($g);
+        $maxId = User::orderBy('id', 'desc')->first(); // Getting id of the last user added
 
-        $function_value = FunctionValue::all();
-        if($function_value) {
-            FunctionValue::truncate();
-        }
+        $Polynomial = array(); // Polynomial // f(x) = 4 + 5x + 7x^2    
+        $Polynomial[0] = $a0;
+        $Polynomial[1] = $a1;
+        $Polynomial[2] = $a2;
+        $encrytionResult = FunctionValue::encrypting($Polynomial, $maxId->id, $g, $x);
 
-        foreach ($request->FunctionValue as $key => $value) {
-            $function_value = new FunctionValue();
-
-            $function_value->x = $key;
-            $function_value->fx = $value;
-            $function_value->base = $request->Base;
-            $function_value->modulus = $request->Modulus;
-
-            if ( !($function_value->save()) ) {
-                return response()->json([
-                    'isMatched' => false, 
-                    'error' => "Couldnot complete FunctionValue update"
-                ]);
-            }
-        }
-
-        foreach ($request->EncryptedCoefficient as $key => $value) {
-            $encrypted_coefficient = new EncryptedCoefficient();
-
-            $encrypted_coefficient->a = $key;
-            $encrypted_coefficient->Ea = $value;
-
-            if ( !($encrypted_coefficient->save()) ) {
-                return response()->json([
-                    'isMatched' => false, 
-                    'error' => "Couldnot complete EncryptedCoefficient update"
-                ]);
-            }
-        }
-
-        return response()->json([
-            'isMatched' => true, 
-            'error' => "Encryption Completed"
-        ]);
-
+        if($encrytionResult){
+            return redirect()->back()->with('success', "Successfully encrypted key");
+        } else {
+            return redirect()->back()->with('error', "Key Encryption Failed");
+        }    
     }
 
 }
