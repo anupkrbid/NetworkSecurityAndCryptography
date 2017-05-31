@@ -36,10 +36,9 @@
 		</nav>
     </header>
     <section>				
-        <div id="container_demo" >
-            <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
-            
+        <div id="container_demo">
             <div id="wrapper">
+            <div id="client">
                 @if ($user->isVerified == 0)   
                     <div id="verify">
                         <form  action="{{ route('client.post.verifyKey', ['id' => $user->id]) }}" method="post" autocomplete="on"> 
@@ -109,13 +108,13 @@
                                 </select>
 
                             </p>
-                            <p> 
                             <p class="signin button"> 
                                 <input type="submit" value="Generate Key"/> 
                             </p>
                         </form>
                     </div> 
-                @endif            
+                @endif
+            </div>          
             </div>
         </div>  
     </section>

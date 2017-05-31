@@ -38,7 +38,7 @@
     <section>               
         <div id="container_demo" >           
             <div id="wrapper">
-                <div id="client">
+                <div id="encrypt">
                 <form  action="{{ route('dealer.post.encryptKey') }}" method="post" autocomplete="on"> 
                         {{ csrf_field() }}               
                         {{-- {{ method_field('put') }}

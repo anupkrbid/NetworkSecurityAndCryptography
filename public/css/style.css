@@ -262,10 +262,10 @@ p.change_link{
 	top: 1px;
 }
 /** Styling both forms **/
-#register,
 #dashboard,
 #client, 
-#login
+#login,
+#newclient,
 #encrypt{
 	position: absolute;
 	top: 0px;

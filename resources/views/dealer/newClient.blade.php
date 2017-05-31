@@ -40,7 +40,7 @@
             <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
             
             <div id="wrapper">
-                <div id="client">
+                <div id="newclient">
                     <form  action="{{ route('dealer.post.addClient') }}" method="post" autocomplete="on"> 
                         {{ csrf_field() }}
                         <h1> Add New Client </h1> 
