@@ -12,6 +12,7 @@
         <meta name="description" content="Login and Registration Form with HTML5 and CSS3" />
         <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
         <meta name="author" content="Codrops" />
+
         <link rel="shortcut icon" href="/images/favicon.ico"> 
         <link rel="stylesheet" type="text/css" href="/css/demo.css" />
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
@@ -22,6 +23,9 @@
         <link rel="stylesheet" type="text/css" href="/css/sweetalert2.min.css" />
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        @yield('head')
+
     </head>
 
     <body>
@@ -47,5 +51,7 @@
         @yield('scripts')
 
     </body>
+
+</html>
     
 

@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@section('head')
+
+<!-- Tells Browser Not to cache this page -->
+<meta http-equiv="cache-control" content="private, max-age=0, no-cache">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="0">
+
+@endsection
+
 @section('content')
 
 <div class="container">

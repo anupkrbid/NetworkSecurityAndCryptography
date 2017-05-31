@@ -11,15 +11,10 @@
 |
 */
 
-// Route::post('/register', [
-// 	'uses' => 'HomesController@register',
-// 	'as' => 'app.post.register'
-// ]);
-
 /** Home Login Page */
-Route::get('/', function () {
+Route::get('/', ['middleware' => 'guest',function () {
     return view('home');
-})->name('app.get.home');
+}])->name('app.get.home');
 
 
 Route::post('/login', [

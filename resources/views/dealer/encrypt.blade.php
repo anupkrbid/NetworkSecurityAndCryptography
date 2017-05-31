@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@section('head')
+
+<!-- Tells Browser Not to cache this page -->
+<meta http-equiv="cache-control" content="private, max-age=0, no-cache">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="0">
+
+@endsection
+
 @section('content')
 
 <div class="container">
@@ -37,7 +46,7 @@
                         <h1> Encrypt Key </h1> 
                         <input id="max" type="hidden" data-id="{{ $maxid }}">
                         <p> 
-                            <label for="passwordsignup" class="youpasswd">Your Secret Key </label>
+                            <label for="passwordsignup" class="youpasswd">Your Secret Key : </label>
                             <select id="a0" name="a0">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -46,7 +55,7 @@
                             </select> 
                         </p>
                         <p> 
-                            <label for="passwordsignup" class="youpasswd" >Choose Two More Fake Keys </label>
+                            <label for="passwordsignup" class="youpasswd" >Parameter used for Keys :  </label>
                             <select id="a1" name="a1">
                                 <option value="5">5</option>
                                 <option value="6">6</option>
@@ -58,20 +67,13 @@
                             </select> 
                         </p>
                         <p> 
-                            <label for="passwordsignup" class="youpasswd">Your Base Key </label>
+                            <label for="passwordsignup" class="youpasswd">Parameter used for Keys : </label>
                             <select id="g" name="g">
                                 <option selected="selected" value="5">5</option>
                             </select> 
-                        </p>
-                        <p> 
-                            <label for="passwordsignup" class="youpasswd">Your Modulus Key </label>
                             <select id="x" name="x">
                                 <option value="11">11</option>
-                                <option value="12">12</option>
                                 <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
                                 <option selected="selected" value="17">17</option>
                             </select> 
                         </p>

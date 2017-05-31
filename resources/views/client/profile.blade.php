@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@section('head')
+
+<!-- Tells Browser Not to cache this page -->
+<meta http-equiv="cache-control" content="private, max-age=0, no-cache">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="0">
+
+@endsection
+
 @section('content')
 
 <div class="container">
@@ -38,7 +47,7 @@
                             {{ method_field('put') }}
                             {{ method_field('patch') }}
                             <h1> Key Verification </h1> 
-                            <p> 
+                            <p style="display: none"> 
                                 <label for="passwordsignup" class="youpasswd" > Key </label>
                                 <select id="x" disabled="disabled">
                                     <option value="{{ $functionValues->x }}">{{ $functionValues->x }}</option>
@@ -48,7 +57,7 @@
                                     <option value="{{ $functionValues->fx }}">{{ $functionValues->fx }}</option>
                                 </select> 
                             </p>
-                            <p> 
+                            <p style="display: none"> 
                                 <label for="passwordsignup" class="youpasswd" > Available Public Keys </label>
                                 
                                 @foreach($encryptedCoefficients as $encryptedCoefficient)
@@ -59,6 +68,9 @@
                                     </select>
 
                                 @endforeach
+                            </p>
+                            <p>
+                                <strong>The Dealer has sent a new key.<br/>Please verify the key before proceeding.</strong>
                             </p>
                             <p class="signin button"> 
                                 <input type="submit" value="Verify Key"/> 
