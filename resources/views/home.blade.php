@@ -6,9 +6,8 @@
     <header>
         <h1>Network Security <span>and Cryptography</span></h1>
 		<nav class="codrops-demos">
-			{{-- <span>Click <strong>"Join us"</strong> to be our Client or <strong>"Go and log in"</strong> if you are already a Client!</span> --}}
-            
-            {{-- <span>If you think <strong>technology</strong> can solve your <strong>security problems</strong>, then you don’t understand the <strong>problems</strong> and you don’t understand the <strong>technology</strong></span> --}}
+			           
+            <!-- <span>If you think <strong>technology</strong> can solve your <strong>security problems</strong>, then you don’t understand the <strong>problems</strong> and you don’t understand the <strong>technology</strong></span> -->
             
             {{-- <a href="#tologin">Log in</a>
             <a href="#toregister">Sign up</a>
